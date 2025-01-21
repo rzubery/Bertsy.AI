@@ -1,2 +1,2 @@
-# Bertsy.AI
+# Bot.AI
 AI Chat Bot
