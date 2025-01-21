@@ -1,0 +1,39 @@
+from chatterbot import ChatBot
+from chatterbot.trainers import ListTrainer
+
+# Create a new chatbot named Bertsy
+bertsy = ChatBot(
+    'Bertsy',
+    storage_adapter='chatterbot.storage.SQLStorageAdapter',
+    database_uri='sqlite:///bertsy.sqlite3'  # Use SQLite for storage
+)
+
+# Create a new trainer for the chatbot
+trainer = ListTrainer(bertsy)
+
+# Train the chatbot based on a list of conversations
+conversation = [
+    "Hello",
+    "Hi there!",
+    "How are you doing?",
+    "I'm doing great.",
+    "That is good to hear",
+    "Thank you.",
+    "You're welcome."
+]
+
+trainer.train(conversation)
+
+# Get a response to an input statement
+response = bertsy.get_response("Good morning!")
+print(response)
+
+# Start a conversation loop
+while True:
+    try:
+        user_input = input("You: ")
+        bot_response = bertsy.get_response(user_input)
+        print("Bertsy:", bot_response)
+
+    except (KeyboardInterrupt, EOFError, SystemExit):
+        break
